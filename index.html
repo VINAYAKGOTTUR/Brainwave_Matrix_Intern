@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Netflix Clone</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Arial', sans-serif;
+    }
+
+    body {
+      background-color: #141414;
+      color: #fff;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    .light-mode {
+      background-color: #f2f2f2;
+      color: #141414;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      background-color: #e50914;
+    }
+
+    nav a {
+      margin-left: 1.5rem;
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    #toggle-theme {
+      background: transparent;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      margin-left: 1rem;
+    }
+
+    .hero {
+      text-align: center;
+      padding: 5rem 2rem;
+      background: url('') no-repeat center center/cover;
+      color: white;
+    }
+
+    .hero h1 {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+    }
+
+    .hero p {
+      font-size: 1.25rem;
+      margin-bottom: 2rem;
+    }
+
+    .hero button {
+      background-color: #e50914;
+      color: white;
+      border: none;
+      padding: 1rem 2rem;
+      font-size: 1rem;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+
+    .features {
+      padding: 4rem 2rem;
+      background-color: #000;
+    }
+
+    .features h2 {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .feature-list {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+    }
+
+    .feature-card {
+      background: #222;
+      padding: 2rem;
+      border-radius: 10px;
+      margin: 1rem;
+      width: 280px;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.4s ease;
+    }
+
+    .feature-card.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .signup {
+      padding: 4rem 2rem;
+      text-align: center;
+    }
+
+    .signup input {
+      padding: 0.75rem;
+      width: 250px;
+      margin: 0.5rem;
+      border-radius: 5px;
+      border: 2px solid transparent;
+    }
+
+    .signup button {
+      padding: 0.75rem 1.5rem;
+      background-color: #e50914;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .footer {
+      text-align: center;
+      padding: 1rem;
+      background-color: #e50914;
+      color: white;
+    }
+
+    #scrollTopBtn {
+      display: none;
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      font-size: 1.5rem;
+      padding: 0.5rem 0.75rem;
+      background-color: #e50914;
+      color: white;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+    }
+    .list{
+            display: flex;
+            gap:20px;
+            list-style-type: none;
+            justify-content: center;
+
+        }
+        .item{
+            font-size: 1.5rem;
+            color: white;
+            /* justify-content: center; */
+            transition: 0.5s ease-in;
+
+        }
+        nav{
+            background-color: black;
+            
+        }
+        .item:hover{
+            color: yellow;
+            cursor: pointer;
+            background-color: red;
+            transform:translate(5px,-5px) ;
+        }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h2>Netflix</h2>
+    <nav class="list" >
+      <a class="item" href="#features">||Features||</a>
+      <a class="item" href="#signup">||Sign Up||</a>
+      <a class="item" href="#footer">||Contact||</a>
+      <button id="toggle-theme">🌙</button>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <h1>Unlimited Movies, TV Shows, and More</h1>
+    <p>Watch anywhere. Cancel anytime.</p>
+    <button onclick="document.getElementById('signup').scrollIntoView({behavior: 'smooth'})">Get Started</button>
+  </section>
+
+  <section id="features" class="features">
+    <h2>Features</h2>
+    <div class="feature-list">
+      <div class="feature-card">📺 Watch on your TV</div>
+      <div class="feature-card">📱 Download and go</div>
+      <div class="feature-card">👨‍👩‍👧‍👦 Create profiles for kids</div>
+    </div>
+  </section>
+
+  <section id="signup" class="signup">
+    <h2>Join Now</h2>
+    <input type="email" id="email" placeholder="Enter your email"/>
+    <button>Sign Up</button>
+    <p id="form-message"></p>
+  </section>
+
+  <footer class="footer" id="footer">
+    <p>© 2025 Netflix Clone | Built with HTML, CSS & JavaScript</p>
+  </footer>
+
+  <button id="scrollTopBtn" title="Scroll to Top">⬆️</button>
+
+  <script>
+    document.getElementById("toggle-theme").addEventListener("click", function () {
+      document.body.classList.toggle("light-mode");
+      this.textContent = document.body.classList.contains("light-mode") ? "🌞" : "🌙";
+    });
+
+    const scrollTopBtn = document.getElementById("scrollTopBtn");
+    window.addEventListener("scroll", () => {
+      scrollTopBtn.style.display = window.scrollY > 300 ? "block" : "none";
+    });
+
+    scrollTopBtn.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+
+    const featureCards = document.querySelectorAll(".feature-card");
+    function revealFeatures() {
+      const triggerBottom = window.innerHeight / 5 * 4;
+      featureCards.forEach(card => {
+        const cardTop = card.getBoundingClientRect().top;
+        if (cardTop < triggerBottom) card.classList.add("visible");
+      });
+    }
+    window.addEventListener("scroll", revealFeatures);
+    window.addEventListener("load", revealFeatures);
+
+    const emailInput = document.getElementById("email");
+    emailInput.addEventListener("input", () => {
+      const email = emailInput.value;
+      const valid = email.includes("@") && email.includes(".");
+      emailInput.style.borderColor = valid ? "#e50914" : "red";
+    });
+  </script>
+
+</body>
+</html>
